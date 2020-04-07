@@ -1,2 +1,3 @@
-# MTPSyncAA
-MTP Playlist Transfer for Amarok-Android
+# MTPMusicSync
+
+MTP Playlist Transfer for Amarok-Android music synching
