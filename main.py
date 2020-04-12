@@ -6,13 +6,24 @@ import shutil
 import functions as fun
 from pathlib import Path
 
-(pName, fldLv, delFileTag) = ('Mixtape142ShakeMeDown.m3u',(6, 2), True)
-(DT, EXT) = (True, True)
-(IPTH, OPTH) = ('./playlists/', './out/')
-# (IPTH, OPTH) = (
-#          './playlists/',
-#          '/run/user/1000/gvfs/mtp:host=%5Busb%3A003%2C013%5D/Samsung SD card/Music/'
-#      )
+###############################################################################
+# Desktop (Git)
+###############################################################################
+# (pName, fldLv, delFileTag, DT, EXT) = (
+#        'Mixtape142ShakeMeDown.m3u',(6, 2), True, False, False
+#    )
+# (IPTH, OPTH) = ('./playlists/', '/home/chipdelmal/Dropbox/Mixtapes/')
+###############################################################################
+# Mobile
+###############################################################################
+(pName, fldLv, delFileTag, DT, EXT) = (
+        'Mixtape142_ ShakeMeDown.m3u', (6, 8), True, False, True
+    )
+(IPTH, OPTH) = (
+         './playlists/',
+         '/run/user/1000/gvfs/mtp:host=%5Busb%3A003%2C012%5D/Samsung SD card/Music'
+     )
+###############################################################################
 # Read the whole m3u file
 (head, flinesNum, sInfo, sPath) = fun.parsePlaylist(IPTH, pName)
 # Check m3u file's length for errors
