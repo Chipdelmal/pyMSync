@@ -5,9 +5,13 @@ MTP Playlist Transfer for Amarok-Android music syncing
 
 ## Use
 
-### [Copy Playlist to Folder](./copyPlaylist.py)
+### [Copy playlist to folder](./copyPlaylist.py)
 
-Takes an m3u with absolute paths and copies all songs into a new folder, creating a new m3u with relative paths.
+Takes an m3u with absolute paths and copies all songs into a new folder (preserving structure), creating a new m3u with relative paths.
+
+### [Change absolute reference](./copyPlaylist.py)
+
+Takes a playlist with an absolute reference and changes it to another given one, whilst saving the new one into the desired folder (useful to convert between iTunes libraries to new ones).
 
 # Author
 
