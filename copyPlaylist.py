@@ -11,9 +11,9 @@ import functions as fun
 # OPTH: Base output path
 # LPTH: Base music library path
 # #############################################################################
-pName = 'Mixtape142ShakeMeDown.m3u'
+pName = 'Mixtape142_ShakeMeDown.m3u'
 (PLST, OPTH, LPTH) = (
-        '/home/chipdelmal/Documents/Github/pyDroid/plst/Amarok/'+pName,
+        '/home/chipdelmal/Documents/Github/pyDroid/playlist/Amarok/'+pName,
         '/home/chipdelmal/Dropbox/Mixtapes/',
         '/media/hdd/Music/'
     )

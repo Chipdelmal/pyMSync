@@ -29,7 +29,7 @@ def rmvFileTag(path, delFileTag=True):
     return infPath
 
 
-def parsePlaylist(IPTH, pName):
+def parsePlaylist(IPTH):
     # Read the whole m3u file
     flines = Path(IPTH).read_text().splitlines()
     # Read head line and count the songs number
@@ -47,9 +47,9 @@ def writePlistLine(f, oufPath, OPTH):
     return True
 
 
-def copyPlaylistToDir(playlist, outputPath, libraryPath):
+def copyPlaylistToDir(playlist, outputPath, libraryPath, delFileTag=True):
     # Read the whole m3u file
-    (head, flinesNum, sInfo, sPath) = parsePlaylist(playlist, '')
+    (head, flinesNum, sInfo, sPath) = parsePlaylist(playlist)
     # Check m3u file's length for errors
     chkPlstLen(sPath, sInfo)
     pName = os.path.basename(playlist)
@@ -62,7 +62,7 @@ def copyPlaylistToDir(playlist, outputPath, libraryPath):
             (info, path) = (clnStr(sInfo[i]), clnStr(sPath[i]))
             (_, fName) = (os.path.dirname(path), os.path.basename(path))
             # Amarok prepends a 'file://' tag to the paths
-            infPath = rmvFileTag(path, delFileTag=True)
+            infPath = rmvFileTag(path, delFileTag=delFileTag)
             # Clean and create folder path in output
             outPth = genOutPth(infPath, outputPath, libraryPath)
             Path(outPth).mkdir(parents=True, exist_ok=True)
