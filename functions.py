@@ -35,7 +35,7 @@ def rmvFileTag(path, delFileTag=True):
 
 def parsePlaylist(IPTH, pName):
     # Read the whole m3u file
-    flines = Path('{}/{}'.format(IPTH, pName)).read_text().splitlines()
+    flines = Path(IPTH).read_text().splitlines()
     # Read head line and count the songs number
     (head, flinesNum) = (flines[0], len(flines)-1)
     (sInfo, sPath) = (

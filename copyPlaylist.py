@@ -9,14 +9,8 @@ from pathlib import Path
 ###############################################################################
 # Desktop (Git)
 ###############################################################################
-(pName, fldLv, delFileTag, DT, EXT) = (
-       'Mixtape142_ ShakeMeDown.m3u', (6, 2), True, False, True
-   )
-(IPTH, OPTH) = ('./playlists/', '/home/chipdelmal/Dropbox/Mixtapes/')
-
-
 (PLST, OPTH, LPTH) = (
-        '/home/chipdelmal/Documents/Github/ADroidMusicSync/playlists/Amarok/Mixtape142_ShakeMeDown.m3u',
+        '/home/chipdelmal/Documents/Github/ADroidMusicSync/playlists/Amarok/Cage.m3u',
         '/home/chipdelmal/Dropbox/Mixtapes/',
         '/media/hdd/Music/'
     )
@@ -24,7 +18,8 @@ from pathlib import Path
 # Read the whole m3u file
 (head, flinesNum, sInfo, sPath) = fun.parsePlaylist(PLST, '')
 # Check m3u file's length for errors
-fun.chkPlstLen(sPath, sInfo)
+nErr = fun.chkPlstLen(sPath, sInfo)
+pName = os.path.basename(PLST)
 # Main songs loop
 with open('{}/{}'.format(OPTH, pName), 'w+') as f:
     f.write('{}\n'.format(head))
@@ -34,7 +29,7 @@ with open('{}/{}'.format(OPTH, pName), 'w+') as f:
         (info, path) = (fun.clnStr(sInfo[i]), fun.clnStr(sPath[i]))
         (fPath, fName) = (os.path.dirname(path), os.path.basename(path))
         # Amarok prepends a 'file://' tag to the paths
-        infPath = fun.rmvFileTag(path, delFileTag=delFileTag)
+        infPath = fun.rmvFileTag(path, delFileTag=True)
         # Clean and create folder path in output
         outPth = fun.genOutPth(infPath, OPTH, LPTH)
         Path(outPth).mkdir(parents=True, exist_ok=True)
