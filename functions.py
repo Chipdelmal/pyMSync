@@ -73,3 +73,23 @@ def copyPlaylistToDir(playlist, outputPath, libraryPath, delFileTag=True):
             # Writing to the new playlist
             f.write(info+'\n')
             writePlistLine(f, oufPath, outputPath)
+
+
+def fixPlistReference(iPth, oPth, bOld, bNew, ClnPath=False):
+    # Read playlist
+    (head, flinesNum, sInfo, sPath) = parsePlaylist(iPth)
+    # Clean paths and names
+    cPth = [sp.replace(bOld, bNew) for sp in sPath]
+    nPls = os.path.basename(iPth)
+    if ClnPath:
+        oFil = oPth + nPls.replace(' ', '')
+    else:
+        oFil = oPth + nPls
+    # Write to file
+    with open(oFil, 'w+') as f:
+        f.write('{}\n'.format(head))
+        sNum = len(sInfo)
+        for i in range(sNum):
+            (info, path) = (clnStr(sInfo[i]), clnStr(cPth[i]))
+            f.write(info+'\n')
+            f.write(path+'\n')
