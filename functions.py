@@ -1,6 +1,7 @@
 
 import os
 import sys
+import shutil
 from pathlib import Path
 
 
@@ -10,13 +11,8 @@ def clnStr(inString):
 
 
 def genOutPth(fPath, OPTH, LPTH):
-    return OPTH + fPath.replace(LPTH, '')
-
-
-# def genOutPth(fPath, OPTH, fldLv=-2):
-#     pthSplit = fPath.split(os.path.sep)[fldLv:]
-#     pthJoin = os.path.join(OPTH, *pthSplit)
-#     return pthJoin
+    tmpFull = OPTH + fPath.replace(LPTH, '')
+    return os.path.dirname(tmpFull)
 
 
 def chkPlstLen(sPath, sInfo):
@@ -45,21 +41,35 @@ def parsePlaylist(IPTH, pName):
     return (head, flinesNum, sInfo, sPath)
 
 
-# def writeDTPlistLine(oufPath, f, fldLv):
-#     splitPth = oufPath.split(os.path.sep)[fldLv[1]:]
-#     droidPth = '\\'.join(splitPth)
-#     f.write('{}\n'.format(droidPth))
-#     return True
-
-
 def writePlistLine(f, oufPath, OPTH):
     droidPth = './' + oufPath.replace(OPTH, '')
     f.write('{}\n'.format(droidPth))
     return True
 
 
-# def writePlistLine(oufPath, f, fldLv):
-#     splitPth = oufPath.split(os.path.sep)[fldLv[1]:]
-#     droidPth = './' + '/'.join(splitPth)
-#     f.write('{}\n'.format(droidPth))
-#     return True
+def copyPlaylistToDir(playlist, outputPath, libraryPath):
+    # Read the whole m3u file
+    (head, flinesNum, sInfo, sPath) = parsePlaylist(playlist, '')
+    # Check m3u file's length for errors
+    chkPlstLen(sPath, sInfo)
+    pName = os.path.basename(playlist)
+    # Main songs loop
+    with open('{}/{}'.format(outputPath, pName), 'w+') as f:
+        f.write('{}\n'.format(head))
+        sNum = len(sInfo)
+        for i in range(sNum):
+            # Start reading playlist pairs
+            (info, path) = (clnStr(sInfo[i]), clnStr(sPath[i]))
+            (_, fName) = (os.path.dirname(path), os.path.basename(path))
+            # Amarok prepends a 'file://' tag to the paths
+            infPath = rmvFileTag(path, delFileTag=True)
+            # Clean and create folder path in output
+            outPth = genOutPth(infPath, outputPath, libraryPath)
+            Path(outPth).mkdir(parents=True, exist_ok=True)
+            print(outPth)
+            oufPath = '{}/{}'.format(outPth, fName)
+            # Copy file to the ouput folder
+            shutil.copyfile(infPath, oufPath)
+            # Writing to the new playlist
+            f.write(info+'\n')
+            writePlistLine(f, oufPath, outputPath)
