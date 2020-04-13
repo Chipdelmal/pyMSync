@@ -9,10 +9,14 @@ def clnStr(inString):
     return tmpStr
 
 
-def genOutPth(fPath, OPTH, fldLv=-2):
-    pthSplit = fPath.split(os.path.sep)[fldLv:]
-    pthJoin = os.path.join(OPTH, *pthSplit)
-    return pthJoin
+def genOutPth(fPath, OPTH, LPTH):
+    return OPTH + fPath.replace(LPTH, '')
+
+
+# def genOutPth(fPath, OPTH, fldLv=-2):
+#     pthSplit = fPath.split(os.path.sep)[fldLv:]
+#     pthJoin = os.path.join(OPTH, *pthSplit)
+#     return pthJoin
 
 
 def chkPlstLen(sPath, sInfo):
@@ -41,15 +45,21 @@ def parsePlaylist(IPTH, pName):
     return (head, flinesNum, sInfo, sPath)
 
 
-def writeDTPlistLine(oufPath, f, fldLv):
-    splitPth = oufPath.split(os.path.sep)[fldLv[1]:]
-    droidPth = '\\'.join(splitPth)
+# def writeDTPlistLine(oufPath, f, fldLv):
+#     splitPth = oufPath.split(os.path.sep)[fldLv[1]:]
+#     droidPth = '\\'.join(splitPth)
+#     f.write('{}\n'.format(droidPth))
+#     return True
+
+
+def writePlistLine(f, oufPath, OPTH):
+    droidPth = './' + oufPath.replace(OPTH, '')
     f.write('{}\n'.format(droidPth))
     return True
 
 
-def writePlistLine(oufPath, f, fldLv):
-    splitPth = oufPath.split(os.path.sep)[fldLv[1]:]
-    droidPth = './' + '/'.join(splitPth)
-    f.write('{}\n'.format(droidPth))
-    return True
+# def writePlistLine(oufPath, f, fldLv):
+#     splitPth = oufPath.split(os.path.sep)[fldLv[1]:]
+#     droidPth = './' + '/'.join(splitPth)
+#     f.write('{}\n'.format(droidPth))
+#     return True

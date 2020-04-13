@@ -9,20 +9,20 @@ from pathlib import Path
 ###############################################################################
 # Desktop (Git)
 ###############################################################################
-# (pName, fldLv, delFileTag, DT, EXT) = (
-#        'Mixtape142ShakeMeDown.m3u',(6, 2), True, False, False
-#    )
-# (IPTH, OPTH) = ('./playlists/', '/home/chipdelmal/Dropbox/Mixtapes/')
+(pName, fldLv, delFileTag, DT, EXT) = (
+       'Mixtape142_ ShakeMeDown.m3u', (6, 2), True, False, True
+   )
+(IPTH, OPTH) = ('./playlists/', '/home/chipdelmal/Dropbox/Mixtapes/')
 ###############################################################################
 # Mobile
 ###############################################################################
-(pName, fldLv, delFileTag, DT, EXT) = (
-        'Mixtape142_ ShakeMeDown.m3u', (6, 8), True, False, True
-    )
-(IPTH, OPTH) = (
-         './playlists/',
-         '/run/user/1000/gvfs/mtp:host=%5Busb%3A003%2C012%5D/Samsung SD card/Music'
-     )
+# (pName, fldLv, delFileTag, DT, EXT) = (
+#         'Mixtape142_ ShakeMeDown.m3u', (6, 8), True, False, True
+#     )
+# (IPTH, OPTH) = (
+#          './playlists/',
+#          '/run/user/1000/gvfs/mtp:host=%5Busb%3A003%2C012%5D/Samsung SD card/Music'
+#      )
 ###############################################################################
 # Read the whole m3u file
 (head, flinesNum, sInfo, sPath) = fun.parsePlaylist(IPTH, pName)
@@ -47,7 +47,4 @@ with open('{}/{}'.format(OPTH, pName), 'w+') as f:
         # Writing to the new playlist
         if EXT:
             f.write(info+'\n')
-        if DT:
-            fun.writeDTPlistLine(oufPath, f, fldLv)
-        else:
-            fun.writePlistLine(oufPath, f, fldLv)
+        fun.writePlistLine(oufPath, f, fldLv)
