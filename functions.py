@@ -56,7 +56,10 @@ def writePlistLine(f, oufPath, OPTH):
     return True
 
 
-def copyPlaylistToDir(playlist, outputPath, libraryPath, delFileTag=True):
+def copyPlaylistToDir(
+            playlist, outputPath, libraryPath,
+            overwrite=False, delFileTag=True
+        ):
     # Copies a playlist to an output path and generates a new, relative, M3U
     #   at the base of the new library path. Currently needs an extended,
     #   absolute path, M3U.
@@ -77,13 +80,23 @@ def copyPlaylistToDir(playlist, outputPath, libraryPath, delFileTag=True):
             # Clean and create folder path in output
             outPth = genOutPth(infPath, outputPath, libraryPath)
             Path(outPth).mkdir(parents=True, exist_ok=True)
-            print(outPth)
             oufPath = '{}/{}'.format(outPth, fName)
             # Copy file to the ouput folder
-            shutil.copyfile(infPath, oufPath)
-            # Writing to the new playlist
-            f.write(info+'\n')
-            writePlistLine(f, oufPath, outputPath)
+            pthCaseCheck = isfile_insensitive(infPath)
+            if pthCaseCheck:
+                infPath = getfile_insensitive(infPath)
+                oExistcheck = os.path.exists(oufPath)
+                if (overwrite) or (not oExistcheck):
+                    shutil.copyfile(infPath, oufPath)
+                    print('Copy:\t{}'.format(oufPath))
+                else:
+                    print('Skip:\t{}'.format(oufPath))
+                # Writing to the new playlist
+                f.write(info+'\n')
+                writePlistLine(f, oufPath, outputPath)
+            else:
+                # File does not exist
+                print('Error:\t{}!'.format(infPath))
 
 
 def fixPlistReference(iPth, oPth, bOld, bNew, ClnPath=False):
@@ -105,3 +118,16 @@ def fixPlistReference(iPth, oPth, bOld, bNew, ClnPath=False):
             (info, path) = (clnStr(sInfo[i]), clnStr(cPth[i]))
             f.write(info+'\n')
             f.write(path+'\n')
+
+
+def getfile_insensitive(path):
+    directory, filename = os.path.split(path)
+    directory, filename = (directory or '.'), filename.lower()
+    for f in os.listdir(directory):
+        newpath = os.path.join(directory, f)
+        if os.path.isfile(newpath) and f.lower() == filename:
+            return newpath
+
+
+def isfile_insensitive(path):
+    return getfile_insensitive(path) is not None
