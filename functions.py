@@ -1,7 +1,10 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import os
 import sys
 import shutil
+import auxiliary as aux
 from pathlib import Path
 
 
@@ -88,15 +91,15 @@ def copyPlaylistToDir(
                 oExistcheck = os.path.exists(oufPath)
                 if (overwrite) or (not oExistcheck):
                     shutil.copyfile(infPath, oufPath)
-                    print('Copy:\t{}'.format(oufPath))
+                    print('{}Copy:\t{}{}'.format(aux.CWHT, oufPath, aux.CEND))
                 else:
-                    print('Skip:\t{}'.format(oufPath))
+                    print('{}Skip:\t{}{}'.format(aux.CBBL, oufPath, aux.CEND))
                 # Writing to the new playlist
                 f.write(info+'\n')
                 writePlistLine(f, oufPath, outputPath)
             else:
                 # File does not exist
-                print('Error:\t{}!'.format(infPath))
+                print('{}Error:\t{}{}'.format(aux.RED, infPath, aux.END))
 
 
 def fixPlistReference(iPth, oPth, bOld, bNew, ClnPath=False):
