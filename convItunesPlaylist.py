@@ -4,6 +4,16 @@
 import glob
 import functions as fun
 
+
+# #############################################################################
+# This script copies the files from an m3u playlist into a desired folder,
+#   along with a new m3u with relative path to the destination.
+# -----------------------------------------------------------------------------
+# iPth: Input path where the m3u file(s) is/are located
+# oPth: Output path for the new m3u file
+# bOld: Base music library path
+# bNew:
+# #############################################################################
 iPth = '/home/chipdelmal/Documents/Github/pyDroid/playlist/iTunes/'
 oPth = '/media/hdd/Music/'
 bOld = '/Users/glados/Music/Music/Media.localized/'

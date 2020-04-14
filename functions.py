@@ -6,22 +6,28 @@ from pathlib import Path
 
 
 def clnStr(inString):
+    # Changes the %20 ASCII to space.
     tmpStr = inString.strip().replace('%20', ' ')
     return tmpStr
 
 
 def genOutPth(fPath, OPTH, LPTH):
+    # Switch core of paths so that a new folder structure can be generated
+    #   in the new location (LPTH to OPTH in fPath).
     tmpFull = OPTH + fPath.replace(LPTH, '')
     return os.path.dirname(tmpFull)
 
 
 def chkPlstLen(sPath, sInfo):
+    # Checks if the paths and info lists are the same length and exits if they
+    #   are not.
     if len(sPath) != len(sInfo):
         sys.exit("There's a problem with the m3u (unequal ids to songs)")
     return True
 
 
 def rmvFileTag(path, delFileTag=True):
+    # Deletes the 'file://' tag that iTunes and Amarok add to absolute paths.
     if delFileTag:
         infPath = path.replace('file://', '')
     else:
@@ -30,7 +36,8 @@ def rmvFileTag(path, delFileTag=True):
 
 
 def parsePlaylist(IPTH):
-    # Read the whole m3u file
+    # Reads an extended m3u file, splits the info and paths info into lists,
+    #   and returns the head, lines number, song info, and song paths.
     flines = Path(IPTH).read_text().splitlines()
     # Read head line and count the songs number
     (head, flinesNum) = (flines[0], len(flines)-1)
@@ -42,13 +49,17 @@ def parsePlaylist(IPTH):
 
 
 def writePlistLine(f, oufPath, OPTH):
+    # Replaces an absolute path with a relative one and writes a line to the
+    #   m3u file connection 'f'.
     droidPth = './' + oufPath.replace(OPTH, '')
     f.write('{}\n'.format(droidPth))
     return True
 
 
 def copyPlaylistToDir(playlist, outputPath, libraryPath, delFileTag=True):
-    # Read the whole m3u file
+    # Copies a playlist to an output path and generates a new, relative, M3U
+    #   at the base of the new library path. Currently needs an extended,
+    #   absolute path, M3U.
     (head, flinesNum, sInfo, sPath) = parsePlaylist(playlist)
     # Check m3u file's length for errors
     chkPlstLen(sPath, sInfo)
@@ -76,7 +87,8 @@ def copyPlaylistToDir(playlist, outputPath, libraryPath, delFileTag=True):
 
 
 def fixPlistReference(iPth, oPth, bOld, bNew, ClnPath=False):
-    # Read playlist
+    # Changes the paths between two absolute-referenced libraries paths
+    #   in a M3U extended playlist.
     (head, flinesNum, sInfo, sPath) = parsePlaylist(iPth)
     # Clean paths and names
     cPth = [sp.replace(bOld, bNew) for sp in sPath]
