@@ -4,6 +4,7 @@
 import os
 import sys
 import shutil
+from unidecode import unidecode
 import auxiliary as aux
 from pathlib import Path
 
@@ -110,6 +111,19 @@ def copyPlaylistToDir(
     writeLog(outputPath, err, cpy, skp)
 
 
+def getfile_insensitive(path):
+    directory, filename = os.path.split(path)
+    directory, filename = (directory or '.'), unidecode(filename.lower())
+    for f in os.listdir(directory):
+        newpath = os.path.join(directory, f)
+        if os.path.isfile(newpath) and unidecode(f.lower()) == filename:
+            return newpath
+
+
+def isfile_insensitive(path):
+    return getfile_insensitive(path) is not None
+
+
 def writeLog(outputPath, err, cpy, skp):
     with open('{}/pyMSync_log.txt'.format(outputPath), 'w') as output:
         for row in err:
@@ -139,16 +153,3 @@ def fixPlistReference(iPth, oPth, bOld, bNew, ClnPath=False):
             (info, path) = (clnStr(sInfo[i]), clnStr(cPth[i]))
             f.write(info+'\n')
             f.write(path+'\n')
-
-
-def getfile_insensitive(path):
-    directory, filename = os.path.split(path)
-    directory, filename = (directory or '.'), filename.lower()
-    for f in os.listdir(directory):
-        newpath = os.path.join(directory, f)
-        if os.path.isfile(newpath) and f.lower() == filename:
-            return newpath
-
-
-def isfile_insensitive(path):
-    return getfile_insensitive(path) is not None
