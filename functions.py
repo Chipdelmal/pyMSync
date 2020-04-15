@@ -61,7 +61,7 @@ def writePlistLine(f, oufPath, OPTH):
 
 def copyPlaylistToDir(
             playlist, outputPath, libraryPath,
-            overwrite=False, delFileTag=True
+            overwrite=False, log=True, delFileTag=True
         ):
     # Copies a playlist to an output path and generates a new, relative, M3U
     #   at the base of the new library path. Currently needs an extended,
@@ -72,6 +72,8 @@ def copyPlaylistToDir(
     pName = os.path.basename(playlist)
     # Main songs loop
     with open('{}/{}'.format(outputPath, pName), 'w+') as f:
+        if log:
+            (err, cpy, skp) = ([], [], [])
         f.write('{}\n'.format(head))
         sNum = len(sInfo)
         for i in range(sNum):
@@ -88,18 +90,34 @@ def copyPlaylistToDir(
             pthCaseCheck = isfile_insensitive(infPath)
             if pthCaseCheck:
                 infPath = getfile_insensitive(infPath)
+                # oufPath = getfile_insensitive(oufPath)
                 oExistcheck = os.path.exists(oufPath)
                 if (overwrite) or (not oExistcheck):
+                    cpy.append(oufPath)
                     shutil.copyfile(infPath, oufPath)
                     print('{}Copy:\t{}{}'.format(aux.CWHT, oufPath, aux.CEND))
                 else:
+                    skp.append(oufPath)
                     print('{}Skip:\t{}{}'.format(aux.CBBL, oufPath, aux.CEND))
                 # Writing to the new playlist
                 f.write(info+'\n')
                 writePlistLine(f, oufPath, outputPath)
             else:
                 # File does not exist
-                print('{}Error:\t{}{}'.format(aux.RED, infPath, aux.END))
+                err.append(infPath)
+                print('{}Error:\t{}{}'.format(aux.CRED, infPath, aux.CEND))
+    # Writing errors log
+    writeLog(outputPath, err, cpy, skp)
+
+
+def writeLog(outputPath, err, cpy, skp):
+    with open('{}/pyMSync_log.txt'.format(outputPath), 'w') as output:
+        for row in err:
+            output.write('Error: \t{}\n'.format(row))
+        for row in skp:
+            output.write('Skip: \t{}\n'.format(row))
+        for row in cpy:
+            output.write('Copy: \t{}\n'.format(row))
 
 
 def fixPlistReference(iPth, oPth, bOld, bNew, ClnPath=False):
