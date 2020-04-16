@@ -26,6 +26,7 @@ Takes a playlist with an absolute reference and changes it to another given one,
     * [Popularimeter](http://id3.org/id3v2.3.0#sec4.18)
 * Other tasks
     * [Case-sensitivity handling](https://stackoverflow.com/questions/25843269/can-you-force-os-path-isfile-to-use-case-insensitivity-when-checking-a-file-on)
+    * [Verbose option](https://stackoverflow.com/questions/5980042/how-to-implement-the-verbose-or-v-option-into-a-script)
 
 # Author
 

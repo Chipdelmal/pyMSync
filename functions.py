@@ -62,11 +62,12 @@ def writePlistLine(f, oufPath, OPTH):
 
 def copyPlaylistToDir(
             playlist, outputPath, libraryPath,
-            overwrite=False, log=True, delFileTag=True
+            overwrite=False, log=True, delFileTag=True, verbose=True
         ):
     # Copies a playlist to an output path and generates a new, relative, M3U
     #   at the base of the new library path. Currently needs an extended,
     #   absolute path, M3U.
+    vprint = print if verbose else lambda *a, **k: None
     (head, flinesNum, sInfo, sPath) = parsePlaylist(playlist)
     # Check m3u file's length for errors
     chkPlstLen(sPath, sInfo)
@@ -96,10 +97,10 @@ def copyPlaylistToDir(
                 if (overwrite) or (not oExistcheck):
                     cpy.append(oufPath)
                     shutil.copyfile(infPath, oufPath)
-                    print('{}Copy:\t{}{}'.format(aux.CWHT, oufPath, aux.CEND))
+                    vprint('{}Copy:\t{}{}'.format(aux.CWHT, oufPath, aux.CEND))
                 else:
                     skp.append(oufPath)
-                    print('{}Skip:\t{}{}'.format(aux.CBBL, oufPath, aux.CEND))
+                    vprint('{}Skip:\t{}{}'.format(aux.CBBL, oufPath, aux.CEND))
                 # Writing to the new playlist
                 f.write(info+'\n')
                 writePlistLine(f, oufPath, outputPath)

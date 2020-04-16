@@ -18,4 +18,7 @@ pName = '4&5.m3u'
         '/home/chipdelmal/Dropbox/Mixtapes/',
         '/media/hdd/Music/'
     )
-fun.copyPlaylistToDir(PLST, OPTH, LPTH, overwrite=False)
+fun.copyPlaylistToDir(
+        PLST, OPTH, LPTH,
+        overwrite=False, log=True, verbose=True
+    )
