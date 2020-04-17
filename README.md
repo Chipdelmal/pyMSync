@@ -1,4 +1,4 @@
-# pyDroidMScync
+# pyMSync
 
 MTP Playlist Transfer for Amarok-Android music syncing
 
