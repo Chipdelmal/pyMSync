@@ -13,7 +13,7 @@ import functions as fun
 # #############################################################################
 pName = '4&5.m3u'
 (PLST, OPTH, LPTH) = (
-        '/home/chipdelmal/Documents/Github/pyDroid/playlist/Amarok/'+pName,
+        '/home/chipdelmal/Documents/Github/pyDroid/playlist/Amarok/' + pName,
         '/home/chipdelmal/Dropbox/Mixtapes/',
         '/media/hdd/Music/'
     )
