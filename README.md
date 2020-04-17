@@ -34,4 +34,6 @@ Under development.
 
 # Author
 
-Héctor M. Sánchez C.
+<img src="./media/pusheen.jpg" height="130px" align="middle"><br>
+
+[Héctor M. Sánchez C.](https://chipdelmal.github.io/)
