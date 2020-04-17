@@ -64,15 +64,14 @@ def copyPlaylistToDir(
             playlist, outputPath, libraryPath,
             overwrite=False, log=True, delFileTag=True, verbose=True
         ):
+    vprint = print if verbose else lambda *a, **k: None
     # Copies a playlist to an output path and generates a new, relative, M3U
     #   at the base of the new library path. Currently needs an extended,
     #   absolute path, M3U.
-    vprint = print if verbose else lambda *a, **k: None
     (head, flinesNum, sInfo, sPath) = parsePlaylist(playlist)
     # Check m3u file's length for errors
     chkPlstLen(sPath, sInfo)
     pName = os.path.basename(playlist)
-    # Main songs loop
     with open('{}/{}'.format(outputPath, pName), 'w+') as f:
         if log:
             (err, cpy, skp) = ([], [], [])
@@ -92,7 +91,6 @@ def copyPlaylistToDir(
             pthCaseCheck = isfile_insensitive(infPath)
             if pthCaseCheck:
                 infPath = getfile_insensitive(infPath)
-                # oufPath = getfile_insensitive(oufPath)
                 oExistcheck = os.path.exists(oufPath)
                 if (overwrite) or (not oExistcheck):
                     cpy.append(oufPath)
@@ -108,8 +106,8 @@ def copyPlaylistToDir(
                 # File does not exist
                 err.append(infPath)
                 print('{}Error:\t{}{}'.format(aux.CRED, infPath, aux.CEND))
-    # Writing errors log
-    writeLog(outputPath, err, cpy, skp)
+    if log:
+        writeLog(outputPath, err, cpy, skp)
 
 
 def getfile_insensitive(path):
@@ -126,6 +124,7 @@ def isfile_insensitive(path):
 
 
 def writeLog(outputPath, err, cpy, skp):
+    # Creates log output for debugging
     with open('{}/pyMSync_log.txt'.format(outputPath), 'w') as output:
         for row in err:
             output.write('Error: \t{}\n'.format(row))

@@ -13,6 +13,9 @@ Takes an m3u with absolute paths and copies all songs into a new folder (preserv
 
 Takes a playlist with an absolute reference and changes it to another given one, whilst saving the new one into the desired folder (useful to convert between iTunes libraries to new ones).
 
+### iTunes Ratings to ID3
+
+Under development.
 
 # Sources
 
@@ -27,6 +30,7 @@ Takes a playlist with an absolute reference and changes it to another given one,
 * Other tasks
     * [Case-sensitivity handling](https://stackoverflow.com/questions/25843269/can-you-force-os-path-isfile-to-use-case-insensitivity-when-checking-a-file-on)
     * [Verbose option](https://stackoverflow.com/questions/5980042/how-to-implement-the-verbose-or-v-option-into-a-script)
+    * [iTunes Rating](https://community.mp3tag.de/t/saving-itunes-rating-and-counter/3803/5)
 
 # Author
 
