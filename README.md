@@ -8,6 +8,24 @@ The original target application was to export an absolute-referenced [M3U](https
 
 ## Use
 
+The scripts take playlists formatted as follows:
+
+```
+#EXTM3U
+#EXTINF:255,Courteeners - Are You in Love With a Notion?
+file:///media/hdd/Music/Courteeners/ANNA/01%20Are%20You%20in%20Love%20With%20a%20Notion_.mp3
+#EXTINF:309,Coldplay - The Scientist
+file:///media/hdd/Music/Coldplay/A%20Rush%20of%20Blood%20to%20the%20Head/04%20The%20Scientist.mp3
+#EXTINF:218,Cage the Elephant - Shake Me Down (acoustic)
+file:///media/hdd/Music/Cage%20The%20Elephant/Thank%20You,%20Happy%20Birthday/2-04%20Shake%20Me%20Down%20(acoustic).mp3
+#EXTINF:254,Blind Pilot - Umpqua Rushing
+file:///media/hdd/Music/Blind%20Pilot/And%20Then%20Like%20Lions/01%20Umpqua%20Rushing.mp3
+#EXTINF:309,Coldplay - The Scientist
+file:///media/hdd/Music/Coldplay/A%20Rush%20of%20Blood%20to%20the%20Head/04%20The%20Scientist.mp3
+```
+
+Where each pair of lines holds the information/path to a song. It can the `file://` prepend, and handles case-sensitive paths for linux.
+
 ### [Transfer playlist](./copyPlaylist.py)
 
 Takes an M3U file from the system, copies the songs that are referenced in the playlist into a selected destination (preserving the folder structure), and creates an equivalent M3U relative-path file at the root of the selected folder.
@@ -20,6 +38,7 @@ Takes a playlist with an absolute reference and changes it to another given one,
 
 ## To-Do
 
+* Non-extended playlist support (without `#EXTINF` lines).
 * Relative-referenced M3U.
 * Test in Windows filesystems (only UNIX has been tested).
 
