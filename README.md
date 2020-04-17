@@ -12,16 +12,26 @@ The scripts take playlists formatted as follows:
 
 ```
 #EXTM3U
-#EXTINF:255,Courteeners - Are You in Love With a Notion?
-file:///media/hdd/Music/Courteeners/ANNA/01%20Are%20You%20in%20Love%20With%20a%20Notion_.mp3
-#EXTINF:309,Coldplay - The Scientist
-file:///media/hdd/Music/Coldplay/A%20Rush%20of%20Blood%20to%20the%20Head/04%20The%20Scientist.mp3
-#EXTINF:218,Cage the Elephant - Shake Me Down (acoustic)
-file:///media/hdd/Music/Cage%20The%20Elephant/Thank%20You,%20Happy%20Birthday/2-04%20Shake%20Me%20Down%20(acoustic).mp3
-#EXTINF:254,Blind Pilot - Umpqua Rushing
-file:///media/hdd/Music/Blind%20Pilot/And%20Then%20Like%20Lions/01%20Umpqua%20Rushing.mp3
-#EXTINF:309,Coldplay - The Scientist
-file:///media/hdd/Music/Coldplay/A%20Rush%20of%20Blood%20to%20the%20Head/04%20The%20Scientist.mp3
+#EXTINF:237,Like A Friend - Pulp
+/media/hdd/Music/Pulp/Great Expectations/14 Like A Friend.mp3
+#EXTINF:254,Umpqua Rushing - Blind Pilot
+/media/hdd/Music/Blind Pilot/And Then Like Lions/01 Umpqua Rushing.mp3
+#EXTINF:163,Wake Me - Bleachers
+/media/hdd/Music/Bleachers/Strange Desire/05 Wake Me.mp3
+#EXTINF:199,A Little Respect - Wheatus
+/media/hdd/Music/Wheatus/Wheatus/04 A Little Respect.mp3
+#EXTINF:151,Surfing In The Sky - The Vaccines
+/media/hdd/Music/The Vaccines/Combat Sports/04 Surfing In The Sky.mp3
+#EXTINF:290,Apocalypse - Cigarettes After Sex
+/media/hdd/Music/Cigarettes After Sex/Cigarettes After Sex/04 Apocalypse.m4a
+#EXTINF:235,Sugartown - The Fratellis
+/media/hdd/Music/The Fratellis/In Your Own Sweet Time/03 Sugartown.mp3
+#EXTINF:267,3 Rounds and a Sound - Blind Pilot
+/media/hdd/Music/Blind Pilot/3 Rounds and a Sound/11 3 Rounds and a Sound.mp3
+#EXTINF:284,Honey and the Moon - Joseph Arthur
+/media/hdd/Music/Joseph Arthur/Redemption's Son/1-02 Honey and the Moon.mp3
+#EXTINF:233,(All Afternoon) In Love - The Vaccines
+/media/hdd/Music/The Vaccines/English Graffiti/05 (All Afternoon) In Love.mp3
 ```
 
 Where each pair of lines holds the information/path to a song. It can the `file://` prepend, and handles case-sensitive paths for linux.

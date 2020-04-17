@@ -11,10 +11,10 @@ import functions as fun
 # OPTH: Base output path
 # LPTH: Base music library path
 # #############################################################################
-pName = '4&5.m3u'
+pName = 'Mixtape138_CountryStars.m3u'
 (PLST, OPTH, LPTH) = (
-        '/home/chipdelmal/Documents/Github/pyDroid/playlist/Amarok/' + pName,
-        '/home/chipdelmal/Dropbox/Mixtapes/',
+        '/media/hdd/Music/' + pName,
+        '/home/chipdelmal/MEGAsync/Sync/Mixtapes/',
         '/media/hdd/Music/'
     )
 fun.copyPlaylistToDir(
