@@ -12,7 +12,7 @@ The original target application was to export an absolute-referenced [M3U](https
 
 Takes an M3U file from the system, copies the songs that are referenced in the playlist into a selected destination (preserving the folder structure), and creates an equivalent M3U relative-path file at the root of the selected folder.
 
-### [Change absolute reference](./copyPlaylist.py)
+### [Change absolute reference](./chgAbsRef.py)
 
 Takes a playlist with an absolute reference and changes it to another given one, whilst saving the new one into the desired folder (useful to transfer libraries across devices).
 
