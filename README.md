@@ -54,9 +54,9 @@ file:///media/hdd/Music/Cage The Elephant/Unpeeled/02 Whole Wide World.mp3
 file:///media/hdd/Music/Yuck/Glow & Behold/11 Glow & Behold.mp3
 ```
 
-Example of use:
+### Example of use
 
-This run will take the 'Mixtape127_TonightTonight.m3u' playlist, and copies the referenced audio files to the '/Sync/Mixtapes' folder with a new m3u placed at its root.
+This run will take the _Mixtape127_TonightTonight.m3u_ playlist, and copies the referenced audio files to the '/Sync/Mixtapes' folder with a new m3u placed at its root:
 
 ```bash
 python pyMSync.py \
@@ -79,13 +79,25 @@ optional arguments:
 -lRt [--libraryRoot]: Music library root (for absolute reference removal). Leave blank if the m3u is stored at the library root.
 ```
 
-### [Transfer playlist](./pyMSync.py)
+<hr>
+
+### Files
+
+#### [pyMSync](./pyMSync.py)
 
 Takes an M3U file from the system, copies the songs that are referenced in the playlist into a selected destination (preserving the folder structure), and creates an equivalent M3U relative-path file at the root of the selected folder.
 
-### [Change absolute reference](./chgAbsRef.py)
+#### [chgAbsRef](./chgAbsRef.py)
 
 Takes a playlist with an absolute reference and changes it to another given one, whilst saving the new one into the desired folder (useful to transfer libraries across devices).
+
+#### [functions](./functions.py)
+
+Functions definitions for the scripts.
+
+#### [auxiliary](./auxiliary.py)
+
+Other necessary definitions for things like pretty console prints.
 
 ## Dependencies
 
@@ -96,7 +108,7 @@ Takes a playlist with an absolute reference and changes it to another given one,
 ## To-Do
 
 * Relative-referenced M3U.
-* Test in Windows filesystems (only UNIX has been tested).
+* Test in Windows file-systems (only UNIX has been tested).
 
 <hr>
 
