@@ -64,6 +64,10 @@ Takes an M3U file from the system, copies the songs that are referenced in the p
 
 Takes a playlist with an absolute reference and changes it to another given one, whilst saving the new one into the desired folder (useful to transfer libraries across devices).
 
+## Dependencies
+
+* [unidecode](https://pypi.org/project/Unidecode/)
+
 <hr>
 
 ## To-Do
