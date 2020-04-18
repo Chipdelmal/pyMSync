@@ -99,6 +99,8 @@ Functions definitions for the scripts.
 
 Other necessary definitions for things like pretty console prints.
 
+<hr>
+
 ## Dependencies
 
 * [unidecode](https://pypi.org/project/Unidecode/)
