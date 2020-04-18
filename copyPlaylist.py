@@ -13,8 +13,7 @@ import functions as fun
 # #############################################################################
 pName = 'Mixtape142_ShakeMeDownNext.m3u'
 (PLST, OPTH, LPTH) = (
-        # '/media/hdd/Music/' + pName,
-        '/home/chipdelmal/Documents/Github/pyDroid/playlist/Amarok/' + pName,
+        '/media/hdd/Music/' + pName,
         '/home/chipdelmal/MEGAsync/Sync/Mixtapes/',
         '/media/hdd/Music/'
     )
