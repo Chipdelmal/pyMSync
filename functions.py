@@ -40,6 +40,16 @@ def rmvFileTag(path, delFileTag=True):
 
 
 def parsePlaylist(IPTH):
+    flines = Path(IPTH).read_text().splitlines()
+    hd = flines[0].strip()
+    if hd == "#EXTM3U":
+        (head, flinesNum, sInfo, sPath) = parsePlaylistExt(IPTH)
+    else:
+        (head, flinesNum, sInfo, sPath) = parsePlaylistNex(IPTH)
+    return (head, flinesNum, sInfo, sPath)
+
+
+def parsePlaylistExt(IPTH):
     # Reads an extended m3u file, splits the info and paths info into lists,
     #   and returns the head, lines number, song info, and song paths.
     flines = Path(IPTH).read_text().splitlines()
@@ -48,6 +58,19 @@ def parsePlaylist(IPTH):
     (sInfo, sPath) = (
             [flines[i] for i in range(1, flinesNum, 2)],
             [flines[i] for i in range(2, flinesNum+1, 2)]
+        )
+    return (head, flinesNum, sInfo, sPath)
+
+
+def parsePlaylistNex(IPTH):
+    # Reads an extended m3u file, splits the info and paths info into lists,
+    #   and returns the head, lines number, song info, and song paths.
+    flines = Path(IPTH).read_text().splitlines()
+    # Read head line and count the songs number
+    (head, flinesNum) = ("\r", len(flines))
+    (sInfo, sPath) = (
+            [None for i in range(0, flinesNum, 1)],
+            [flines[i] for i in range(0, flinesNum, 1)]
         )
     return (head, flinesNum, sInfo, sPath)
 
@@ -79,7 +102,7 @@ def copyPlaylistToDir(
         sNum = len(sInfo)
         for i in range(sNum):
             # Start reading playlist pairs
-            (info, path) = (clnStr(sInfo[i]), clnStr(sPath[i]))
+            (info, path) = (sInfo[i], clnStr(sPath[i]))
             (_, fName) = (os.path.dirname(path), os.path.basename(path))
             # Amarok prepends a 'file://' tag to the paths
             infPath = rmvFileTag(path, delFileTag=delFileTag)
@@ -100,7 +123,8 @@ def copyPlaylistToDir(
                     skp.append(oufPath)
                     vprint('{}Skip:\t{}{}'.format(aux.CBBL, oufPath, aux.CEND))
                 # Writing to the new playlist
-                f.write(info+'\n')
+                if info is not None:
+                    f.write(info+'\n')
                 writePlistLine(f, oufPath, outputPath)
             else:
                 # File does not exist
@@ -150,6 +174,7 @@ def fixPlistReference(iPth, oPth, bOld, bNew, ClnPath=False):
         f.write('{}\n'.format(head))
         sNum = len(sInfo)
         for i in range(sNum):
-            (info, path) = (clnStr(sInfo[i]), clnStr(cPth[i]))
-            f.write(info+'\n')
+            (info, path) = (sInfo[i], clnStr(cPth[i]))
+            if info is not None:
+                f.write(info+'\n')
             f.write(path+'\n')
