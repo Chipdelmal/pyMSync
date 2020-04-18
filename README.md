@@ -110,6 +110,7 @@ Other necessary definitions for things like pretty console prints.
 ## To-Do
 
 * Relative-referenced M3U.
+* Case-sensitive to case-insensitive path compatibility.
 * Test in Windows file-systems (only UNIX has been tested).
 
 <hr>
