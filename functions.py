@@ -96,8 +96,7 @@ def copyPlaylistToDir(
     chkPlstLen(sPath, sInfo)
     pName = os.path.basename(playlist)
     with open('{}/{}'.format(outputPath, pName), 'w+') as f:
-        if log:
-            (err, cpy, skp) = ([], [], [])
+        (err, cpy, skp) = ([], [], [])
         f.write('{}\n'.format(head))
         sNum = len(sInfo)
         for i in range(sNum):

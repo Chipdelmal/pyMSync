@@ -54,9 +54,32 @@ file:///media/hdd/Music/Cage The Elephant/Unpeeled/02 Whole Wide World.mp3
 file:///media/hdd/Music/Yuck/Glow & Behold/11 Glow & Behold.mp3
 ```
 
+Example of use:
 
+This run will take the 'Mixtape127_TonightTonight.m3u' playlist, and copies the referenced audio files to the '/Sync/Mixtapes' folder with a new m3u placed at its root.
 
-### [Transfer playlist](./copyPlaylist.py)
+```bash
+python pyMSync.py \
+    '/media/hdd/Music/Mixtape127_TonightTonight.m3u' \
+    '/home/chipdelmal/Sync/Mixtapes' \
+    -o -l -v
+```
+
+The description of the arguments being:
+
+```
+positional arguments:
+iPlst: Input playlist absolute path.
+oFldr: Output folder absolute path.      
+
+optional arguments:
+-o   [--overwrite]: Overwrites audio files if they are found in destiny location.
+-l   [--log]: Creates a log at the destiny location with a summary of the run.
+-v   [--verbose]: Prints the whole process to the terminal.
+-lRt [--libraryRoot]: Music library root (for absolute reference removal). Leave blank if the m3u is stored at the library root.
+```
+
+### [Transfer playlist](./pyMSync.py)
 
 Takes an M3U file from the system, copies the songs that are referenced in the playlist into a selected destination (preserving the folder structure), and creates an equivalent M3U relative-path file at the root of the selected folder.
 
