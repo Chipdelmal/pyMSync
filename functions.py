@@ -136,10 +136,12 @@ def copyPlaylistToDir(
 def getfile_insensitive(path):
     directory, filename = os.path.split(path)
     directory, filename = (directory or '.'), unidecode(filename.lower())
-    for f in os.listdir(directory):
-        newpath = os.path.join(directory, f)
-        if os.path.isfile(newpath) and unidecode(f.lower()) == filename:
-            return newpath
+    pthChk = os.path.exists(directory)
+    if pthChk:
+        for f in os.listdir(directory):
+            newpath = os.path.join(directory, f)
+            if os.path.isfile(newpath) and unidecode(f.lower()) == filename:
+                return newpath
 
 
 def isfile_insensitive(path):
