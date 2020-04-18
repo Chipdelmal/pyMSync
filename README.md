@@ -8,7 +8,7 @@ The original target application was to export an absolute-referenced [M3U](https
 
 ## Use
 
-The scripts take playlists formatted as follows:
+The scripts take extended playlists formatted as follows:
 
 ```
 #EXTM3U
@@ -33,8 +33,28 @@ The scripts take playlists formatted as follows:
 #EXTINF:233,(All Afternoon) In Love - The Vaccines
 /media/hdd/Music/The Vaccines/English Graffiti/05 (All Afternoon) In Love.mp3
 ```
+Where each pair of lines holds the information/path to a song. It automatically removes the `file://` prepend, and handles case-sensitive paths for Linux.
 
-Where each pair of lines holds the information/path to a song. It can the `file://` prepend, and handles case-sensitive paths for linux.
+Not extended playlists are to be formatted as follows (with or without the `file://` tag):
+
+```
+file:///media/hdd/Music/Courteeners/ANNA/01 Are You in Love With a Notion_.mp3
+file:///media/hdd/Music/Coldplay/A Rush of Blood to the Head/04 The Scientist.mp3
+file:///media/hdd/Music/Cage The Elephant/Thank You, Happy Birthday/2-04 Shake Me Down (acoustic).mp3
+file:///media/hdd/Music/EELS/Shootenanny!/05 Dirty Girl.mp3
+file:///media/hdd/Music/Courteeners/Falcon/1-01 The Opener.mp3
+file:///media/hdd/Music/Coldplay/A Rush of Blood to the Head/04 The Scientist.mp3
+file:///media/hdd/Music/Blind Pilot/And Then Like Lions/01 Umpqua Rushing.mp3
+file:///media/hdd/Music/Coldplay/Viva la Vida or Death and All His Friends/1-07 Viva la Vida.mp3
+file:///media/hdd/Music/EELS/Beautiful Freak/06 My Beloved Monster.mp3
+file:///media/hdd/Music/Cigarettes After Sex/Cigarettes After Sex/04 Apocalypse.m4a
+file:///media/hdd/Music/Coldplay/Viva la Vida or Death and All His Friends/1-07 Viva la Vida.mp3
+file:///media/hdd/Music/Hozier/Hozier (Deluxe Version)/1-04 Someone New.mp3
+file:///media/hdd/Music/Cage The Elephant/Unpeeled/02 Whole Wide World.mp3
+file:///media/hdd/Music/Yuck/Glow & Behold/11 Glow & Behold.mp3
+```
+
+
 
 ### [Transfer playlist](./copyPlaylist.py)
 
@@ -48,7 +68,6 @@ Takes a playlist with an absolute reference and changes it to another given one,
 
 ## To-Do
 
-* Non-extended playlist support (without `#EXTINF` lines).
 * Relative-referenced M3U.
 * Test in Windows filesystems (only UNIX has been tested).
 
