@@ -99,6 +99,7 @@ def copyPlaylistToDir(
         (err, cpy, skp) = ([], [], [])
         f.write('{}\n'.format(head))
         sNum = len(sInfo)
+        print('Copying {} files. Please wait...'.format(sNum))
         for i in range(sNum):
             # Start reading playlist pairs
             (info, path) = (sInfo[i], clnStr(sPath[i]))
@@ -117,10 +118,18 @@ def copyPlaylistToDir(
                 if (overwrite) or (not oExistcheck):
                     cpy.append(oufPath)
                     shutil.copyfile(infPath, oufPath)
-                    vprint('{}Copy:\t{}{}'.format(aux.CWHT, oufPath, aux.CEND))
+                    cReport = formatPrint(
+                            "Copy", oufPath, i, sNum,
+                            colors=(aux.CBBL, aux.CEND)
+                        )
+                    vprint(cReport)
                 else:
                     skp.append(oufPath)
-                    vprint('{}Skip:\t{}{}'.format(aux.CBBL, oufPath, aux.CEND))
+                    sReport = formatPrint(
+                            "Skip", oufPath, i, sNum,
+                            colors=(aux.CBMA, aux.CEND)
+                        )
+                    vprint(sReport)
                 # Writing to the new playlist
                 if info is not None:
                     f.write(info+'\n')
@@ -128,9 +137,33 @@ def copyPlaylistToDir(
             else:
                 # File does not exist
                 err.append(infPath)
-                print('{}Error:\t{}{}'.format(aux.CRED, infPath, aux.CEND))
+                eReport = formatPrint(
+                        "Error", oufPath, i, sNum,
+                        colors=(aux.CRED, aux.CEND)
+                    )
+                print(eReport)
     if log:
         writeLog(outputPath, err, cpy, skp)
+    # Goodbye and report
+    print('Finished! {}'.format(summaryString(cpy, skp, err)))
+
+
+def summaryString(cpy, skp, err):
+    sumStr = '[{}copy: {}, {}skip: {}, {}error: {}{}]'.format(
+            aux.CBBL, len(cpy),
+            aux.CBMA, len(skp),
+            aux.CRED, len(err),
+            aux.CEND
+        )
+    return sumStr
+
+
+def formatPrint(type, path, ix, total, colors=(aux.CRED, aux.CEND)):
+    formattedStr = '({}/{}) {}{}:\t{}{}'.format(
+            str(ix+1).zfill(len(str(total))), str(total),
+            colors[0], type, path, colors[1]
+        )
+    return formattedStr
 
 
 def getfile_insensitive(path):
