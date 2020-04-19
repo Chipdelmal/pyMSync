@@ -59,10 +59,7 @@ file:///media/hdd/Music/Yuck/Glow & Behold/11 Glow & Behold.mp3
 This run will take the _Mixtape127_TonightTonight.m3u_ playlist, and copies the referenced audio files to the '/Sync/Mixtapes' folder with a new m3u placed at its root:
 
 ```bash
-python pyMSync.py \
-    '/media/hdd/Music/Mixtape127_TonightTonight.m3u' \
-    '/home/chipdelmal/Sync/Mixtapes' \
-    -o -l -v
+python pyMSync.py '/media/hdd/Music/Mixtape127_TonightTonight.m3u' '/home/chipdelmal/Sync/Mixtapes' -o -l -v
 ```
 
 The description of the arguments being:
@@ -78,6 +75,7 @@ optional arguments:
 -v   [--verbose]: Prints the whole process to the terminal.
 -lRt [--libraryRoot]: Music library root (for absolute reference removal). Leave blank if the m3u is stored at the library root.
 ```
+For more information on how it works, have a look at my [blog post](https://chipdelmal.github.io/blog/posts/pymsync)!
 
 <hr>
 
