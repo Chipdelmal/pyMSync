@@ -43,7 +43,6 @@ cmdPar.add_argument(
     )
 # Parse arguments -------------------------------------------------------------
 args = cmdPar.parse_args()
-print(args)
 
 # #############################################################################
 # Copy the playlist
