@@ -78,6 +78,7 @@ optional arguments:
 -v   [--verbose]: Prints the whole process to the terminal.
 -lRt [--libraryRoot]: Music library root (for absolute reference removal). Leave blank if the m3u is stored at the library root.
 ```
+For more information on how it works, have a look at my [blog post](https://chipdelmal.github.io/blog/posts/pymsync)!
 
 <hr>
 
