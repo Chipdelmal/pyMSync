@@ -78,7 +78,7 @@ def parsePlaylistNex(IPTH):
 def writePlistLine(f, oufPath, OPTH):
     # Replaces an absolute path with a relative one and writes a line to the
     #   m3u file connection 'f'.
-    droidPth = './' + oufPath.replace(OPTH, '')
+    droidPth = '.' + oufPath.replace(OPTH, '')
     f.write('{}\n'.format(droidPth))
     return True
 
