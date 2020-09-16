@@ -3,13 +3,11 @@ import subprocess
 from glob import glob
 
 (playlists, out) = (
-        sorted(glob('/media/hdd/Music/SM*.m3u'))[:],
-        '/media/chipdelmal/cache/DroidSync'
+        sorted(glob('/mnt/Luma/Music/MX*.m3u'))[:],
+        '/mnt/Luma/DroidSync'
     )
 # Comand string
 fmt = 'python pyMSync.py {} {} -v -o'
-
-fmt.format(, '/media/chipdelmal/cache/DroidSync')
 
 for plst in playlists:
     cmnd = fmt.format(plst, out)
